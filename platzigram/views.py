@@ -27,7 +27,7 @@ def hi(request):
 	}
 
 	# Regresamos la data en formato JSON
-	return HttpResponse(json.dumps(data),content_type='application/json')
+	return HttpResponse(json.dumps(data,indent=3,content_type='application/json')
 
 
 
