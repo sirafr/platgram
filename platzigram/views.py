@@ -29,10 +29,8 @@ def sorted_integers(request):
 	}
 
 	# Regresamos la data en formato JSON
-	return HttpResponse(
-		json.dumps(data,indent=3),
-		content_type='application/json'
-		)
+	return HttpResponse(json.dumps(data,indent=3),
+	content_type='application/json')
 
 def say_hi(request,name,age):
 	if age<12:
