@@ -21,6 +21,11 @@ class User(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
+    # Reto
+
+    country = models.CharField(max_length=100,blank=True)
+    city = models.CharField(max_length=100,blank=True)
+
     def __str__(self):
         """Return email"""
         return self.email
