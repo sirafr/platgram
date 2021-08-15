@@ -1,7 +1,8 @@
 """POST VIEWS"""
 # Django
-#from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
+
 
 # Utilities
 from datetime import datetime
@@ -36,6 +37,8 @@ posts = [
     }
 ]
 
+
+@login_required
 def list_post(request):
     """list existing post"""
 
