@@ -12,7 +12,7 @@ class PostAdmin(admin.ModelAdmin):
     """POST ADMIN"""
     list_display = ('pk','user','photo')
     list_display_links = ('pk','user')
-    list_editable = ('phone_number','website')
+    list_editable = ('photo',)
     list_filter = ('created','modified',)
     
 
