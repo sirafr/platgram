@@ -24,6 +24,12 @@ def login_view(request):
     
     return render(request,'users/login.html')
 
+def signup(request):
+    """Sign Up View"""
+    #import pdb; pdb.set_trace()
+    #print(request.POST)
+    return render(request,'users/signup.html')
+
 @login_required
 def logout_view(request):
     """Logout view"""
