@@ -12,6 +12,11 @@ from django.db.utils import IntegrityError
 from django.contrib.auth.models import User
 from users.models import Profile
 
+
+def update_profile(request):
+    """Update a users's profile view"""
+    return render(request,'users/update_profile.html')
+
 def login_view(request):
     """login view"""
     if request.method == 'POST':
@@ -59,6 +64,7 @@ def signup(request):
 
 
     return render(request,'users/signup.html')
+    
 
 @login_required
 def logout_view(request):
