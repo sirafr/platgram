@@ -34,9 +34,13 @@ urlpatterns = [
     path('hello-world/',local_views.hello_world,name='hello_world'),
     path('sorted/',local_views.sorted_integers,name='sort'),
     path('hi/<str:name>/<int:age>/',local_views.say_hi,name='hi'),
-    path('posts/', posts_views.list_post,name='feed'),
+
+    path('', posts_views.list_post,name='feed'),
+    path('posts/new/', posts_views.create_post,name='create_post'),
+
     path('users/login/',user_views.login_view,name='login'),
     path('users/logout/',user_views.logout_view,name='logout'),
-    path('users/signup/',user_views.signup,name='signup')
+    path('users/signup/',user_views.signup,name='signup'),
+    path('users/me/profile/',user_views.update_profile,name='update_profile'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
