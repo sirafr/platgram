@@ -57,7 +57,7 @@ class SignupForm(forms.Form):
         profile.save()
 
 class ProfileForm(forms.Form):
-    """Porfile form."""
+    """Profile form."""
 
     website = forms.URLField(max_length=200, required=True)
     biography = forms.CharField(max_length=500, required=False)
