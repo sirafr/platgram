@@ -12,8 +12,8 @@ urlpatterns = [
 
     # Posts
     path(
-        route='profile/<str:username>/',
-        view=TemplateView.as_view(template_name='users/detail.html'),
+        route='@<str:username>/',
+        view=views.UserDetailView.as_view(),
         name='detail'
     ),
 
@@ -29,14 +29,15 @@ urlpatterns = [
         name='logout'
     ),
     path(
-        route='users/signup/',
+        route='signup/',
         view=views.signup,
         name='signup'
     ),
     path(
         route='me/profile/',
         view=views.update_profile,
-        name='update_profile'
-    )
+        name='update'
+    ),
+    
 
 ]

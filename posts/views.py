@@ -1,7 +1,10 @@
 """POST VIEWS"""
 # Django
+from django.contrib.auth import mixins
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render,redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import ListView
 
 # Utilities
 from datetime import datetime
@@ -12,11 +15,15 @@ from posts.forms import PostForm
 # Models
 from posts.models import Post
 
-@login_required
-def list_post(request):
-    """list existing post"""
-    posts = Post.objects.all().order_by('-created')
-    return render(request,'posts/feed.html',{'posts':posts})
+class PostsFeedView(LoginRequiredMixin,ListView):
+    """RETURN ALL PUBLISHED POSTS"""
+
+    template_name = 'posts/feed.html'
+    model = Post
+    ordering = ('-created')
+    paginate_by = 2
+    context_object_name = 'posts'
+
 
 @login_required
 def create_post(request):
