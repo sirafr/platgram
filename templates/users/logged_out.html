@@ -12,6 +12,9 @@
         </p>
     {% endif%}
 
+    <p>You have logged out, wanna join again?</p>
+    
+
     <form method="POST" action="{% url "users:login" %}">
         {% csrf_token %}
 
