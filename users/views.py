@@ -1,10 +1,9 @@
 """Users views."""
 
 # Django
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
+from django.contrib.auth import views as auth_views
 from django.urls import reverse_lazy,reverse
 from django.views.generic import DetailView, FormView, UpdateView
 
@@ -64,23 +63,26 @@ class UpdateProfileView(LoginRequiredMixin,UpdateView):
         username = self.object.user.username
         return reverse('users:detail',kwargs={'username':username})
 
-def login_view(request):
-    """Login view."""
-    if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user:
-            login(request, user)
+class LoginView(auth_views.LoginView):
+    """LOGIN VIEW"""
+
+    template_name = 'users/login.html'
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+        form.fields['username'].widget.attrs.update({
+            'class': 'form-control'})
+        form.fields['password'].widget.attrs.update({
+            'class': 'form-control'})
+        return form
+
+    def get(self, request, *args, **kwargs):
+        """Handle GET requests: instantiate a blank version of the form."""
+        if request.user.is_authenticated:
             return redirect('posts:feed')
-        else:
-            return render(request, 'users/login.html', {'error': 'Invalid username and password'})
+        return super().get(request, args, kwargs)
 
-    return render(request, 'users/login.html')
+class LogoutView(LoginRequiredMixin,auth_views.LogoutView):
+    """LOGOUT VIEW"""
 
-
-@login_required
-def logout_view(request):
-    """Logout a user."""
-    logout(request)
-    return redirect('users:login')
+    template_name = 'users/logged_out.html'
